@@ -15,6 +15,7 @@ All of the commands for the script, along with the usage of the commands can be 
 This page can be seen by just using the script with no arguments or when '-help' is entered as the argument.
 
 Whenever a command is executed, the log file is updated with the current date/time, the user and the command used with the script.
+
 <img src="https://github.com/EthanGilles/System-Management-Tool/blob/44a756eb65f2e1534a3e2bbe704c081176481d66/images/logfile.png">
 
 <h2>Other Screenshots</h2>
