@@ -21,10 +21,13 @@ Whenever a command is executed, the log file is updated with the current date/ti
 <h2>Other Screenshots</h2>
 
 -disk
+
 <img src="https://github.com/EthanGilles/System-Management-Tool/blob/44a756eb65f2e1534a3e2bbe704c081176481d66/images/disk.png">
 
 -mem
+
 <img src="https://github.com/EthanGilles/System-Management-Tool/blob/44a756eb65f2e1534a3e2bbe704c081176481d66/images/memory.png">
 
 -procs
+
 <img src="https://github.com/EthanGilles/System-Management-Tool/blob/44a756eb65f2e1534a3e2bbe704c081176481d66/images/procs.png">
