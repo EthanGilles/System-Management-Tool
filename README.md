@@ -14,6 +14,8 @@ All of the commands for the script, along with the usage of the commands can be 
 
 This page can be seen by just using the script with no arguments or when '-help' is entered as the argument.
 
+Whenever a command is executed, the log file is updated with the current date/time, the user and the command used with the script.
+
 
 <h2>Other Screenshots</h2>
 
