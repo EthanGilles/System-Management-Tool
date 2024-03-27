@@ -31,3 +31,7 @@ Whenever a command is executed, the log file is updated with the current date/ti
 -procs
 
 <img src="https://github.com/EthanGilles/System-Management-Tool/blob/44a756eb65f2e1534a3e2bbe704c081176481d66/images/procs.png">
+
+-procs [filter]
+
+<img src="https://github.com/EthanGilles/System-Management-Tool/blob/da35d7f83601d612296adaf2152db06875d3ab8e/images/procs%5Bfilter%5D.png">
