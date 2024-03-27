@@ -72,6 +72,8 @@ procs() {
     if [ -z "$1" ]; then
         ps -e -o user,pid,ppid,tty,stime,cmd
     else
+        echo "Showing processes that match '$1':"
+        echo ""
         ps -e -o user,pid,ppid,tty,stime,cmd | awk -v value="$1" '(value == $1 || value == $2)'
     fi
 }
