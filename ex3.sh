@@ -142,7 +142,30 @@ backup() {
 
 } 
 
+# -find [dir] [pattern]
+find_it() {
+    # If there are not two arguments to the backup command then display the usage
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Error: Please enter a directory to search and a pattern to find in filenames"
+        echo ""
+        echo "----------------------------------------------------------------------"
+        echo "Usage:   -find [directory] [pattern]"
+        echo "         [directory]      Directory (and all of its subdirectories) to be searched."
+        echo "         [pattern]        The pattern to match to the file names."
+        exit 1
+    fi
+    
+    # Error handling
+    if [ ! -d "$1" ]; then
+        echo "Error: Directory '$1' does not exist."
+        exit 1
+    fi
+    
 
+    echo "Searching in '$1' for files matching the pattern '$2':"
+    echo ""
+    find "$1" -type f -name "$2"
+}
 
 #EXECUTION OF SCRIPT --
 
@@ -174,6 +197,10 @@ if [[ $# -gt 0 ]]; then
             ;;
         -backup)
             backup "$2" "$3"
+            exit 0
+            ;;
+        -find)
+            find_it "$2" "$3"
             exit 0
             ;;
         *)  # If an o

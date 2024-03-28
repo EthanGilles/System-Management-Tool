@@ -5,3 +5,19 @@
 [2024-03-27 11:12:06] (ethan) ./ex3.sh -procs ethan
 [2024-03-27 11:14:11] (ethan) ./ex3.sh -procs ethan
 [2024-03-27 11:14:31] (ethan) ./ex3.sh -procs ethan
+[2024-03-28 09:00:15] (ethan) ./ex3.sh 
+[2024-03-28 09:00:19] (ethan) ./ex3.sh -find
+[2024-03-28 09:00:57] (ethan) ./ex3.sh -find
+[2024-03-28 09:01:20] (ethan) ./ex3.sh -find . *.sh
+[2024-03-28 09:02:26] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
+[2024-03-28 09:03:38] (ethan) ./ex3.sh -find /home/ethan/scripts
+[2024-03-28 09:04:23] (ethan) ./ex3.sh -find /home/ethan/scripts
+[2024-03-28 09:04:44] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
+[2024-03-28 09:04:48] (ethan) ./ex3.sh -find /home/ethan/scripts
+[2024-03-28 09:05:28] (ethan) ./ex3.sh -find
+[2024-03-28 09:05:35] (ethan) ./ex3.sh -find /home/ethan/scripts
+[2024-03-28 09:06:51] (ethan) ./ex3.sh -find /home/ethan/scripts
+[2024-03-28 09:06:58] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
+[2024-03-28 09:07:57] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
+[2024-03-28 09:08:19] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
+[2024-03-28 09:08:30] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
