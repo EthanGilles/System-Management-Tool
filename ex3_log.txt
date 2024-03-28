@@ -21,3 +21,17 @@
 [2024-03-28 09:07:57] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
 [2024-03-28 09:08:19] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
 [2024-03-28 09:08:30] (ethan) ./ex3.sh -find /home/ethan/scripts *.sh
+[2024-03-28 11:11:05] (ethan) ./ex3.sh -dupes /home/ethan
+[2024-03-28 11:11:43] (ethan) ./ex3.sh -dupes /home/ethan/scripts
+[2024-03-28 11:16:50] (ethan) ./ex3.sh -cleanup
+[2024-03-28 11:17:00] (ethan) ./ex3.sh -cleanup
+[2024-03-28 11:17:50] (ethan) ./ex3.sh -cleanup
+[2024-03-28 11:18:08] (ethan) ./ex3.sh -cleanup /home/ethan/scripts
+[2024-03-28 11:25:06] (ethan) ./ex3.sh -cleanup /home/ethan/scripts
+[2024-03-28 11:33:21] (ethan) ./ex3.sh -alertThreshold
+[2024-03-28 11:33:36] (ethan) ./ex3.sh -alertThreshold
+[2024-03-28 11:33:41] (ethan) ./ex3.sh -alertThreshold 40
+[2024-03-28 11:33:57] (ethan) ./ex3.sh -alertThreshold 10
+[2024-03-28 11:34:05] (ethan) ./ex3.sh -alertThreshold 10
+[2024-03-28 11:34:46] (ethan) ./ex3.sh 
+[2024-03-28 11:36:34] (ethan) ./ex3.sh 

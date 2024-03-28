@@ -10,34 +10,6 @@ log() {
     echo "[$(date +"%Y-%m-%d %H:%M:%S")] ($USER) $@" >> "$LOG_FILE"
 }
 
-# -help
-help() {
-    echo "Usage: $0 [options] [arguments]"
-    echo ""
-    echo "Options:"
-    echo "  -disk                 Show disk usage for all mounted filesystems, indicating available and used space."
-    echo "  -mem                  Display a summary of memory usage, including total, used, free, and cached memory."
-    echo "  -procs [filter]       Show running processes, optionally filtered by a user or command name."
-    echo "  -kill [PID]           Terminate a process by PID"
-    echo "  -backup [dir] [dest]  Create a compressed backup of a specified directory, with options for destination path."
-    echo "  -find [dir] [pattern] Search for files matching a pattern and a list of their locations"
-    echo "  -dupes [dir]          Identify duplicate files in a specified directory or the entire filesystem."
-    echo "  -cleanup [dir]        Cleanup a specified directory by removing temporary or unnecessary files."
-    echo "  -alertThreshold [MEM%]  Set alert thresholds for memory usage."
-    echo "  -help                 Display this help message and exit"
-    echo ""
-    echo "Examples: "
-    echo "  ./ex3.sh -disk"
-    echo "  ./ex3.sh -mem"
-    echo "  ./ex3.sh -procs sshd"
-    echo "  ./ex3.sh -kill 0"
-    echo "  ./ex3.sh -backup /path/to/source /path/to/destination"
-    echo "  ./ex3.sh -find '*.tmp'"
-    echo "  ./ex3.sh -dupes /path/to/check"
-    echo "  ./ex3.sh -alertThreshold 75 80"
-    echo "  ./ex3.sh -cleanup /path/to/cleanup"
-}
-
 # -disk
 disk() {
     echo "Disk Usage for All Mounted Filesystems: "
@@ -167,7 +139,110 @@ find_it() {
     find "$1" -type f -name "$2"
 }
 
-#EXECUTION OF SCRIPT --
+# -dupes [dir]
+dupes() {
+    # When no directory is entered.
+    if [ -z "$1" ]; then
+        echo "Error: Please enter a directory to search for duplicate files"
+        echo ""
+        echo "----------------------------------------------------------------------"
+        echo "Usage:   -dupes [directory]"
+        echo "         [directory]      Directory (and all of its subdirectories) to be searched."
+        exit 1
+    fi
+
+    echo "Identifying duplicate files in '$1'. This might take a while ... "
+    # find files in the directory, sort by checksum, then print the duplicate checksum values
+    find "$1" -type f -exec md5sum {} + | sort | uniq -w32 --all-repeated=separate
+}
+
+# -cleanup [dir]
+cleanup() {
+    # When no directory is entered.
+    if [ -z "$1" ]; then
+        echo "Error: Please enter a directory to remove all temporary files"
+        echo "       Temporary files are files marked with '.tmp' or '.bak'"
+        echo ""
+        echo "----------------------------------------------------------------------"
+        echo "Usage:   -cleanup [directory]"
+        echo "         [directory]      Directory to remove temporary files"
+        exit 1
+    fi
+
+    # Print temp files
+    echo "Cleaning up files in '$1'..."
+    find "$1" -type f \( -name "*.tmp" -o -name "*.bak" \) -print
+
+    # Read their response to the confirmation question
+    read -p "Are you sure you want to delete these files? (y/n): " maybe
+    
+    # If the response is not "y"
+    if [ "$maybe" != "y" ]; then
+        echo "Files will not be deleted."
+    else # If the response is "y" find and delete the files again.
+        find "$1" -type f \( -name "*.tmp" -o -name "*.bak" \) -delete
+        echo "Cleanup complete."
+    fi
+    
+}
+
+# alertThreshold [MEM%]
+alertThresh() {
+    # When no directory is entered.
+    if [ -z "$1" ]; then
+        echo "Error: Please enter a memory percentage to act as a threshold for alerts"
+        echo ""
+        echo "----------------------------------------------------------------------"
+        echo "Usage:   -alertThreshold [MEM%]"
+        echo "         [MEM%]      Memory percentage (0-100) threshold."
+        echo "         Any value > MEM% will trigger an alert."
+        exit 1
+    fi
+
+    # Get total memory and free memory
+    total_mem=$(free -m | awk 'NR==2 {print $2}')
+    free_mem=$(free -m | awk 'NR==2 {print $4}')
+
+    # Calculate used memory percentage
+    used_mem=$((100 * ($total_mem - $free_mem) / $total_mem))
+
+    echo "Current Memory Usage: $used_mem%"
+    if [ "$used_mem" -gt "$1" ]; then
+        echo "Warning: Memory usage ($used_mem%) exceeds threshold ($1%)!"
+    fi
+}
+
+# -help
+help() {
+    # Displays help screen
+
+    echo "Usage: $0 [options] [arguments]"
+    echo ""
+    echo "Options:"
+    echo "  -disk                 Show disk usage for all mounted filesystems, indicating available and used space."
+    echo "  -mem                  Display a summary of memory usage, including total, used, free, and cached memory."
+    echo "  -procs [filter]       Show running processes, optionally filtered by a user or command name."
+    echo "  -kill [PID]           Terminate a process by PID"
+    echo "  -backup [dir] [dest]  Create a compressed backup of a specified directory, with options for destination path."
+    echo "  -find [dir] [pattern] Search for files matching a pattern and a list of their locations"
+    echo "  -dupes [dir]          Identify duplicate files in a specified directory or the entire filesystem."
+    echo "  -cleanup [dir]        Cleanup a specified directory by removing temporary or unnecessary files."
+    echo "  -alertThreshold [MEM%]  Set alert thresholds for memory usage."
+    echo "  -help                 Display this help message and exit"
+    echo ""
+    echo "Examples: "
+    echo "  ./ex3.sh -disk"
+    echo "  ./ex3.sh -mem"
+    echo "  ./ex3.sh -procs sshd"
+    echo "  ./ex3.sh -kill 0"
+    echo "  ./ex3.sh -backup /path/to/source /path/to/destination"
+    echo "  ./ex3.sh -find . '*.tmp'"
+    echo "  ./ex3.sh -dupes /path/to/check"
+    echo "  ./ex3.sh -alertThreshold 75"
+    echo "  ./ex3.sh -cleanup /path/to/cleanup"
+}
+
+#EXECUTION --
 
 # Log the command.
 log "$0 $*"
@@ -203,6 +278,18 @@ if [[ $# -gt 0 ]]; then
             find_it "$2" "$3"
             exit 0
             ;;
+        -dupes)
+            dupes "$2"
+            exit 0
+            ;;
+        -cleanup)
+            cleanup "$2"
+            exit 0
+            ;;
+        -alertThreshold)
+            alertThresh "$2"
+            exit 0
+            ;;
         *)  # If an o
             echo "Error: Unknown command '$1'"
             echo ""
@@ -212,7 +299,7 @@ if [[ $# -gt 0 ]]; then
     esac
 fi
 
-# If there are no command, then the script just shows the help page.
+# If there are no command, then just show the help page.
 if [[ $# -eq 0 ]]; then
     help
     exit 0
