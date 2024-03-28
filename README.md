@@ -35,3 +35,27 @@ Whenever a command is executed, the log file is updated with the current date/ti
 -procs [filter]
 
 <img src="https://github.com/EthanGilles/System-Management-Tool/blob/da35d7f83601d612296adaf2152db06875d3ab8e/images/procs%5Bfilter%5D.png">
+
+-kill [PID]
+
+<img src="https://github.com/EthanGilles/System-Management-Tool/blob/cda50d38e3e286c12ca1ccd1d72eb7d0980acd84/images/kill.png">
+
+-backup [directory] [destination]
+
+<img src="https://github.com/EthanGilles/System-Management-Tool/blob/cda50d38e3e286c12ca1ccd1d72eb7d0980acd84/images/backup.png">
+
+-find [directory] [pattern]
+
+<img src="https://github.com/EthanGilles/System-Management-Tool/blob/cda50d38e3e286c12ca1ccd1d72eb7d0980acd84/images/find.png">
+
+-dupes [directory]
+
+<img src="https://github.com/EthanGilles/System-Management-Tool/blob/3a02546fa6280a19408381837eba208e637c85af/images/dupes.png">
+
+-cleanup [directory]
+
+<img src="https://github.com/EthanGilles/System-Management-Tool/blob/3a02546fa6280a19408381837eba208e637c85af/images/cleanup.png">
+
+-alertThreshold [MEM%]
+
+<img src="https://github.com/EthanGilles/System-Management-Tool/blob/3a02546fa6280a19408381837eba208e637c85af/images/alert.png">
