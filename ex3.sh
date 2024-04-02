@@ -97,7 +97,7 @@ backup() {
     # The variables needed for the command
     source="$1"
     destination="$2"
-    backup="backup_$(date +'%Y-%m-%d_%H-%M-%S').tar.gz"
+    backup="backup_$(date +'%Y-%m-%d_%H:%M:%S').tar.gz"
 
     # If the source destination is not actually a directory then display error message.
     if [ ! -d "$source" ]; then
@@ -186,7 +186,7 @@ cleanup() {
     
 }
 
-# alertThreshold [MEM%]
+# -alertThreshold [MEM%]
 alertThresh() {
     # When no directory is entered.
     if [ -z "$1" ]; then
@@ -247,7 +247,7 @@ help() {
 # Log the command.
 log "$0 $*"
 
-#Process the command that is input
+# Process the command that is input
 if [[ $# -gt 0 ]]; then
     case "$1" in
         -help)
@@ -299,7 +299,7 @@ if [[ $# -gt 0 ]]; then
     esac
 fi
 
-# If there are no command, then just show the help page.
+# If there are no commands, then just show the help page.
 if [[ $# -eq 0 ]]; then
     help
     exit 0
